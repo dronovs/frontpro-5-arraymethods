@@ -80,13 +80,44 @@ let addressesOfStudents = {
 console.table(addressesOfStudents);
 console.log(`-------------------------------`);
 
-function updatesArrays (arr) {
-    arr.map( student => {
+
+// function to add firstName and lastName
+function addFirstLastName (arr) {
+     return arr.map( student => {
         return {
-            firstName: 'Ivan',
-            lastName: 'Ivanov'
+            ...student,
+            firstName: student.firstName ? student.firstName : student.firstName = 'Ivan',
+            lastName: student.lastName ? student.lastName : student.lastName = 'Ivanov',
         }
         })
 }
-let oneMoreUpdatedArrayOfStudent = updatesArrays(studentsUpdatedArray);
-console.log(updatesArrays(oneMoreUpdatedArrayOfStudent));
+let arrOfStudentsFirstLastNames = addFirstLastName(studentsUpdatedArray);
+console.table(`Array with added first and last names`, arrOfStudentsFirstLastNames);
+console.log(`-------------------------------`);
+
+// function to return objects with 3 or more keys
+function filtersThreeOrMoreKeys (arr) {
+    return arr.filter(student => {
+        return Object.keys(student).length >= 3;
+    })
+}
+
+let filteredArrayWithThreeOrMoreKeys = filtersThreeOrMoreKeys(arrOfStudentsFirstLastNames);
+console.log(`Filtered array with 3 or more keys`, filteredArrayWithThreeOrMoreKeys);
+console.log(`-------------------------------`);
+
+// function to filter keys with numbers and strings
+function filtersObjectsStringNumber (arr) {
+    return arr.filter((student) => {
+        let valuesOfObjects = Object.values(student);
+        return (
+            valuesOfObjects.some((value) => typeof value === 'string') &&
+            valuesOfObjects.some((value) => typeof value === 'number')
+        )
+    })
+
+}
+
+let anotherFilteredArray = filtersObjectsStringNumber(arrOfStudentsFirstLastNames);
+console.log(`Filtered array of strings and numbers`, anotherFilteredArray);
+console.log(`-------------------------------`);
