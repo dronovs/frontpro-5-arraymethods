@@ -52,10 +52,7 @@ console.log(`-------------------------------`);
 //updated array of students
 let studentsUpdatedArray = users.map(user => {
     return {
-        name: user.name,
-        age: user.age,
-        marks: user.marks,
-        address: user.address,
+        ...user,
         isAdult: user[`age`] >= 18,
         averageMark: user.marks.reduce((sum, current) => sum + current)/(user.marks.length - 1)
     }
